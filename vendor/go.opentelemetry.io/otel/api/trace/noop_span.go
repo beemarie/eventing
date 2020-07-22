@@ -1,4 +1,4 @@
-// Copyright 2019, OpenTelemetry Authors
+// Copyright The OpenTelemetry Authors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -39,7 +39,7 @@ func (NoopSpan) IsRecording() bool {
 }
 
 // SetStatus does nothing.
-func (NoopSpan) SetStatus(status codes.Code) {
+func (NoopSpan) SetStatus(status codes.Code, msg string) {
 }
 
 // SetError does nothing.

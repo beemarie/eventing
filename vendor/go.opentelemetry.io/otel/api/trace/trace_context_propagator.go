@@ -1,4 +1,4 @@
-// Copyright 2019, OpenTelemetry Authors
+// Copyright The OpenTelemetry Authors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -45,14 +45,15 @@ func DefaultHTTPPropagator() propagation.HTTPPropagator {
 
 func (TraceContext) Inject(ctx context.Context, supplier propagation.HTTPSupplier) {
 	sc := SpanFromContext(ctx).SpanContext()
-	if sc.IsValid() {
-		h := fmt.Sprintf("%.2x-%s-%.16x-%.2x",
-			supportedVersion,
-			sc.TraceIDString(),
-			sc.SpanID,
-			sc.TraceFlags&core.TraceFlagsSampled)
-		supplier.Set(traceparentHeader, h)
+	if !sc.IsValid() {
+		return
 	}
+	h := fmt.Sprintf("%.2x-%s-%.16x-%.2x",
+		supportedVersion,
+		sc.TraceIDString(),
+		sc.SpanID,
+		sc.TraceFlags&core.TraceFlagsSampled)
+	supplier.Set(traceparentHeader, h)
 }
 
 func (tc TraceContext) Extract(ctx context.Context, supplier propagation.HTTPSupplier) context.Context {

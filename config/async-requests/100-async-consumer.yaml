@@ -1,8 +1,8 @@
 apiVersion: serving.knative.dev/v1
 kind: Service
 metadata:
-  name: async-component
-  namespace: default
+  name: async-consumer
+  namespace: knative-eventing
 spec:
   template:
     spec:
@@ -12,4 +12,4 @@ spec:
           # https://github.com/knative/eventing-contrib/tree/master/cmd/event_display/main.go
           # image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display
           # image: docker.io/beemarie/event_display-32e1ea0794c74f2503c99a937fc5ea96
-          image: ko://knative.dev/eventing/cmd/async
+          image: ko://knative.dev/eventing/cmd/async/consumer

@@ -2,6 +2,7 @@ apiVersion: sources.knative.dev/v1beta1
 kind: KafkaSource
 metadata:
   name: kafka-source
+  namespace: knative-eventing
 spec:
   consumerGroup: knative-group
   bootstrapServers:
@@ -12,4 +13,4 @@ spec:
     ref:
       apiVersion: serving.knative.dev/v1
       kind: Service
-      name: async-component
+      name: async-consumer
